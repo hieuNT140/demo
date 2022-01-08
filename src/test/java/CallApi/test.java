@@ -6,5 +6,7 @@ public class test {
         String a1= "trung";
         String a2= "hieu";
         System.out.println(stringBuffer.append(a2));
+
+        System.out.println("Hieu");
     }
 }
