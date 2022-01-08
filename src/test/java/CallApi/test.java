@@ -15,5 +15,6 @@ public class test {
         System.out.println("init gitlab");
         System.out.println("test gitlab");
         System.out.println("test gitlab2");
+        System.out.println("test gitlab3");
     }
 }
