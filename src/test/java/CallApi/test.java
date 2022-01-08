@@ -11,5 +11,8 @@ public class test {
         System.out.println("Hieu 1234456dsd");
         System.out.println("Nhanh 2");
         System.out.println("Git lab");
+
+        System.out.println("init gitlab");
+        System.out.println("test gitlab");
     }
 }
