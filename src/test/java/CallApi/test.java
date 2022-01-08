@@ -7,6 +7,6 @@ public class test {
         String a2= "hieu";
         System.out.println(stringBuffer.append(a2));
 
-        System.out.println("Hieu 1234456");
+        System.out.println("Hieu 1234456dsd");
     }
 }
