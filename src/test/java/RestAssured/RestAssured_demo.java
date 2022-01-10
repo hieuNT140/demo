@@ -1,6 +1,7 @@
 package RestAssured;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.http.Method;
@@ -94,10 +95,11 @@ public class RestAssured_demo {
 
         requestParams.put("name", "morpheus");
         requestParams.put("job", "leader");
+        //requestParams.put("rank", "gold");
 
         //httpRequest.header("Content-Type", "application/json");
 
-        httpRequest.body(requestParams.toJSONString()); // attach above data to the request
+        httpRequest.body(requestParams); // attach above data to the request
 
         //Response object
         Response response = httpRequest.request(Method.POST, "/api/users");
@@ -116,6 +118,31 @@ public class RestAssured_demo {
         String successCode = response.jsonPath().get("id");
         //Assert.assertEquals(successCode, "27");
 
+    }
+
+    @Test
+    void PostMethor_object(){
+        //Specify base URI
+        RestAssured.baseURI = "https://reqres.in/";
+
+        //Request object
+        RequestSpecification httpRequest = RestAssured.given();
+        ObjectRequest object = new ObjectRequest();
+        object.setName("morpheus");
+        object.setJob("leader");
+        object.setRank("Gold");
+
+        httpRequest.contentType(ContentType.JSON);
+        httpRequest.body(object);
+
+        //Response object
+        Response response = httpRequest.request(Method.POST, "/api/users");
+
+        response.prettyPrint();
+
+        //print response in console window
+//        String responseBody = response.getBody().asString();
+//        System.out.println("Response Body ob is:" + responseBody);
     }
 
     @Test
