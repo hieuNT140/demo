@@ -1,5 +1,7 @@
 package RestAssured;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -95,11 +97,13 @@ public class RestAssured_demo {
 
         requestParams.put("name", "morpheus");
         requestParams.put("job", "leader");
-        //requestParams.put("rank", "gold");
+        requestParams.put("rank", "gold");
 
         //httpRequest.header("Content-Type", "application/json");
+        httpRequest.contentType(ContentType.JSON);
 
         httpRequest.body(requestParams); // attach above data to the request
+
 
         //Response object
         Response response = httpRequest.request(Method.POST, "/api/users");
@@ -108,6 +112,7 @@ public class RestAssured_demo {
 
         String responseBody = response.getBody().asString();
         System.out.println("Response Body is:" + responseBody);
+        response.prettyPrint(); // in ra dung form Json
 
         //status code validation
         int statusCode = response.getStatusCode();
@@ -131,6 +136,7 @@ public class RestAssured_demo {
         object.setName("morpheus");
         object.setJob("leader");
         object.setRank("Gold");
+        System.out.println(object);
 
         httpRequest.contentType(ContentType.JSON);
         httpRequest.body(object);
@@ -143,6 +149,17 @@ public class RestAssured_demo {
         //print response in console window
 //        String responseBody = response.getBody().asString();
 //        System.out.println("Response Body ob is:" + responseBody);
+
+        //Test @SerializedName
+        final GsonBuilder builder = new GsonBuilder();
+        final Gson gson = builder.create();
+        final String json = gson.toJson(object);  //chuyen doi tu object java =>> json
+        System.out.println("Json: " + json);
+
+        //chuyen doi tu Json =>> java obj
+        final ObjectRequest objectRequest = gson.fromJson(json, ObjectRequest.class);
+        System.out.println("Java Object: " + objectRequest);
+        System.out.println(objectRequest.getName());
     }
 
     @Test
